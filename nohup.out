@@ -1,0 +1,7 @@
+libva error: vaGetDriverNameByIndex() failed with unknown libva error, driver_name = (null)
+[3527:3527:0517/210253.950892:ERROR:viz_main_impl.cc(185)] Exiting GPU process due to errors during initialization
+libva error: vaGetDriverNameByIndex() failed with unknown libva error, driver_name = (null)
+[3594:3594:0517/210254.604974:ERROR:viz_main_impl.cc(185)] Exiting GPU process due to errors during initialization
+libva error: vaGetDriverNameByIndex() failed with unknown libva error, driver_name = (null)
+[3648:3648:0517/210254.848696:ERROR:gpu_memory_buffer_support_x11.cc(44)] dri3 extension not supported.
+[3571:8:0517/210254.914273:ERROR:command_buffer_proxy_impl.cc(125)] ContextResult::kTransientFailure: Failed to send GpuControl.CreateCommandBuffer.

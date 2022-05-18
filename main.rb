@@ -1,4 +1,5 @@
 require_relative 'board'
 require_relative 'move'
 
-p Board.new.moves
+board = Board.new
+p board.knight_moves([0, 0], [6, 5])

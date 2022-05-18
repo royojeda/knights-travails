@@ -34,7 +34,8 @@ class Board
           arr.push(current.location)
           current = current.parent
         end
-        return arr.reverse
+        p arr.reverse
+        return
       end
 
       x = current.location[0]

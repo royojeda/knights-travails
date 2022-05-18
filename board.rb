@@ -22,7 +22,7 @@ class Board
     end
   end
 
-  def enqueue_child(current, position)
+  def enqueue(current, position)
     child = moves.select { |move| move.location == position }[0]
     return if child.nil? || done.include?(child)
 
@@ -46,22 +46,53 @@ class Board
         p arr.reverse
         return
       end
+      children = calc_children(current)
 
-      x = current.location[0]
-      y = current.location[1]
-
-      nne = [x + 1, y + 2]
-      ene = [x + 2, y + 1]
-      ese = [x + 2, y - 1]
-      sse = [x + 1, y - 2]
-      ssw = [x - 1, y - 2]
-      wsw = [x - 2, y - 1]
-      wnw = [x - 2, y + 1]
-      nnw = [x - 1, y + 2]
-
-      children = [nne, ene, ese, sse, ssw, wsw, wnw, nnw]
-
-      children.each { |child| enqueue_child(current, child) }
+      children.each { |child| enqueue(current, child) }
     end
+  end
+
+  def calc_children(current)
+    arr = []
+    arr.push(nne(current))
+    arr.push(ene(current))
+    arr.push(ese(current))
+    arr.push(sse(current))
+    arr.push(ssw(current))
+    arr.push(wsw(current))
+    arr.push(wnw(current))
+    arr.push(nnw(current))
+  end
+
+  def nne(current)
+    [current.location[0] + 1, current.location[1] + 2]
+  end
+
+  def ene(current)
+    [current.location[0] + 2, current.location[1] + 1]
+  end
+
+  def ese(current)
+    [current.location[0] + 2, current.location[1] - 1]
+  end
+
+  def sse(current)
+    [current.location[0] + 1, current.location[1] - 2]
+  end
+
+  def ssw(current)
+    [current.location[0] - 1, current.location[1] - 2]
+  end
+
+  def wsw(current)
+    [current.location[0] - 2, current.location[1] - 1]
+  end
+
+  def wnw(current)
+    [current.location[0] - 2, current.location[1] + 1]
+  end
+
+  def nnw(current)
+    [current.location[0] - 1, current.location[1] + 2]
   end
 end

@@ -38,18 +38,22 @@ class Board
       done.push(current)
 
       if current.location == fin
-        arr = []
-        until current.nil?
-          arr.push(current.location)
-          current = current.parent
-        end
-        p arr.reverse
+        trace_steps(current)
         return
       end
-      children = calc_children(current)
 
+      children = calc_children(current)
       children.each { |child| enqueue(current, child) }
     end
+  end
+
+  def trace_steps(current)
+    arr = []
+    until current.nil?
+      arr.push(current.location)
+      current = current.parent
+    end
+    p arr.reverse
   end
 
   def calc_children(current)

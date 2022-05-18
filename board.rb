@@ -31,6 +31,11 @@ class Board
   end
 
   def knight_moves(start, fin)
+    unless start.all? { |coordinate| coordinate.between?(0, 7) }
+      puts 'Invalid starting point.'
+      return
+    end
+
     queue.push moves.select { |move| move.location == start }[0]
 
     until queue.empty?

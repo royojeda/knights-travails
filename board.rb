@@ -39,7 +39,7 @@ class Board
 
       if current.location == fin
         trace_steps(current)
-        break
+        return
       end
 
       children = calc_children(current)

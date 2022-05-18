@@ -1,10 +1,12 @@
 require_relative 'move'
 
 class Board
-  attr_accessor :moves
+  attr_accessor :moves, :done, :queue
 
   def initialize
     @moves = []
+    @done = []
+    @queue = []
     build_board
   end
 
@@ -20,9 +22,16 @@ class Board
     end
   end
 
+  def enqueue_child(current, position)
+    child = moves.select { |move| move.location == position }[0]
+    return if child.nil? || done.include?(child)
+
+    child.parent = current
+    queue.push(child)
+  end
+
   def knight_moves(start, fin)
-    queue = [].push moves.select { |move| move.location == start }[0]
-    done = []
+    queue.push moves.select { |move| move.location == start }[0]
 
     until queue.empty?
       current = queue.shift
@@ -41,53 +50,29 @@ class Board
       x = current.location[0]
       y = current.location[1]
 
-      nne = moves.select { |move| move.location == [x + 1, y + 2] }[0]
-      unless nne.nil? || done.include?(nne)
-        nne.parent = current
-        queue.push(nne)
-      end
+      nne = [x + 1, y + 2]
+      enqueue_child(current, nne)
 
-      ene = moves.select { |move| move.location == [x + 2, y + 1] }[0]
-      unless ene.nil? || done.include?(ene)
-        ene.parent = current
-        queue.push(ene)
-      end
+      ene = [x + 2, y + 1]
+      enqueue_child(current, ene)
 
-      ese = moves.select { |move| move.location == [x + 2, y - 1] }[0]
-      unless ese.nil? || done.include?(ese)
-        ese.parent = current
-        queue.push(ese)
-      end
+      ese = [x + 2, y - 1]
+      enqueue_child(current, ese)
 
-      sse = moves.select { |move| move.location == [x + 1, y - 2] }[0]
-      unless sse.nil? || done.include?(sse)
-        sse.parent = current
-        queue.push(sse)
-      end
+      sse = [x + 1, y - 2]
+      enqueue_child(current, sse)
 
-      ssw = moves.select { |move| move.location == [x - 1, y - 2] }[0]
-      unless ssw.nil? || done.include?(ssw)
-        ssw.parent = current
-        queue.push(ssw)
-      end
+      ssw = [x - 1, y - 2]
+      enqueue_child(current, ssw)
 
-      wsw = moves.select { |move| move.location == [x - 2, y - 1] }[0]
-      unless wsw.nil? || done.include?(wsw)
-        wsw.parent = current
-        queue.push(wsw)
-      end
+      wsw = [x - 2, y - 1]
+      enqueue_child(current, wsw)
 
-      wnw = moves.select { |move| move.location == [x - 2, y + 1] }[0]
-      unless wnw.nil? || done.include?(wnw)
-        wnw.parent = current
-        queue.push(wnw)
-      end
+      wnw = [x - 2, y + 1]
+      enqueue_child(current, wnw)
 
-      nnw = moves.select { |move| move.location == [x - 1, y + 2] }[0]
-      unless nnw.nil? || done.include?(nnw)
-        nnw.parent = current
-        queue.push(nnw)
-      end
+      nnw = [x - 1, y + 2]
+      enqueue_child(current, nnw)
     end
   end
 end

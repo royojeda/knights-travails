@@ -51,28 +51,17 @@ class Board
       y = current.location[1]
 
       nne = [x + 1, y + 2]
-      enqueue_child(current, nne)
-
       ene = [x + 2, y + 1]
-      enqueue_child(current, ene)
-
       ese = [x + 2, y - 1]
-      enqueue_child(current, ese)
-
       sse = [x + 1, y - 2]
-      enqueue_child(current, sse)
-
       ssw = [x - 1, y - 2]
-      enqueue_child(current, ssw)
-
       wsw = [x - 2, y - 1]
-      enqueue_child(current, wsw)
-
       wnw = [x - 2, y + 1]
-      enqueue_child(current, wnw)
-
       nnw = [x - 1, y + 2]
-      enqueue_child(current, nnw)
+
+      children = [nne, ene, ese, sse, ssw, wsw, wnw, nnw]
+
+      children.each { |child| enqueue_child(current, child) }
     end
   end
 end

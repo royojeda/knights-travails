@@ -45,6 +45,7 @@ class Board
       children = calc_children(current)
       children.each { |child| enqueue(current, child) }
     end
+    puts 'Invalid target.'
   end
 
   def trace_steps(current)
